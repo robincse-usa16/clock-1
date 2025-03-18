@@ -102,42 +102,63 @@
 
 // console.log(data);
 
+// const data = [
+//   {
+//     name: "Math",
+//     death: 1990,
+//     birthdayYear: 1920,
+//   },
+//   {
+//     name: "English",
+//     death: 2005,
+//     birthdayYear: 1940,
+//   },
+//   {
+//     name: "Physics",
+//     death: 1985,
+//     birthdayYear: 1910,
+//   },
+//   {
+//     name: "Chamastry",
+//     death: 2010,
+//     birthdayYear: 1935,
+//   },
+//   {
+//     name: "Biologey",
+//     death: 2020,
+//     birthdayYear: 1950,
+//   },
+// ];
+
+// let biggest = data.reduce(
+//   (max, current) => {
+//     const lifespan = current.death - current.birthdayYear;
+//     return lifespan > max.lifespan ? { current, lifespan } : max;
+//   },
+//   { lifespan: 0 }
+// );
+
+// console.log(
+//   `The biggest lifespan is ${biggest.name} with ${biggest.lifespan} years.`
+// );
+// console.log(data)
+
 const data = [
-  {
-    name: "Math",
-    death: 1990,
-    birthdayYear: 1920,
-  },
-  {
-    name: "English",
-    death: 2005,
-    birthdayYear: 1940,
-  },
-  {
-    name: "Physics",
-    death: 1985,
-    birthdayYear: 1910,
-  },
-  {
-    name: "Chamastry",
-    death: 2010,
-    birthdayYear: 1935,
-  },
-  {
-    name: "Biologey",
-    death: 2020,
-    birthdayYear: 1950,
-  },
+  { name: "Math", death: 1990, birthdayYear: 1920 },
+  { name: "English", death: 2005, birthdayYear: 1940 },
+  { name: "Physics", death: 1985, birthdayYear: 1910 },
+  { name: "Chamastry", death: 2010, birthdayYear: 1935 },
+  { name: "Biologey", death: 2020, birthdayYear: 1950 },
 ];
 
-let biggest = data.reduce(
-  (max, current) => {
-    const lifespan = current.death - current.birthdayYear;
-    return lifespan > max.lifespan ? { current, lifespan } : max;
-  },
-  { lifespan: 0 }
+const biggest = data.reduce((max, current) =>
+  current.death - current.birthdayYear > max.death - max.birthdayYear
+    ? current
+    : max
 );
 
 console.log(
-  `The biggest lifespan is ${biggest.name} with ${biggest.lifespan} years.`
+  `The biggest lifespan is ${biggest.name} with ${
+    biggest.death - biggest.birthdayYear
+  } years.`
 );

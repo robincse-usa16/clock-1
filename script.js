@@ -239,12 +239,12 @@ function clock() {
   $("min").innerHTML = zeroPadding(m);
   $("sec").innerHTML = zeroPadding(s);
   $("ampm").innerHTML = ampm;
-  const prevActive = document.querySelector(".active");
-  if (prevActive) prevActive.classList.remove("active");
 
-  const currentDayElement = $(daysOfWeek[day]);
-  if (currentDayElement) currentDayElement.classList.add("active");
+  $(daysOfWeek.at(day - 1)).classList.remove("active");
+  $(daysOfWeek[day]).classList.add("active");
+
   $("year").innerHTML = year;
+
   $("month").innerHTML = months[month];
   $("day").innerHTML = zeroPadding(date);
 }

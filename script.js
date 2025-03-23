@@ -141,24 +141,112 @@
 // console.log(
 //   `The biggest lifespan is ${biggest.name} with ${biggest.lifespan} years.`
 // );
-// console.log(data)
 
-const data = [
-  { name: "Math", death: 1990, birthdayYear: 1920 },
-  { name: "English", death: 2005, birthdayYear: 1940 },
-  { name: "Physics", death: 1985, birthdayYear: 1910 },
-  { name: "Chamastry", death: 2010, birthdayYear: 1935 },
-  { name: "Biologey", death: 2020, birthdayYear: 1950 },
+// console.log(data);
+// const data = [
+//   { name: "Math", death: 1990, birthdayYear: 1920 },
+//   { name: "English", death: 2005, birthdayYear: 1940 },
+//   { name: "Physics", death: 1985, birthdayYear: 1910 },
+//   { name: "Chamastry", death: 2010, birthdayYear: 1935 },
+//   { name: "Biologey", death: 2020, birthdayYear: 1950 },
+// ];
+
+// const biggest = data.reduce((max, current) =>
+//   current.death - current.birthdayYear > max.death - max.birthdayYear
+//     ? current
+//     : max
+// );
+
+// console.log(
+//   `The biggest lifespan is ${biggest.name} with ${
+//     biggest.death - biggest.birthdayYear
+//   } years.`
+// );
+
+// Iteration 1:
+// current = { name: "Math", death: 1990, birthdayYear: 1920 }
+// Lifespan: 1990 - 1920 = 70
+// max = { lifespan: 0 }
+// Since 70 > 0, max is updated to { name: "Math", death: 1990, birthdayYear: 1920, lifespan: 70 }.
+
+// Iteration 2:
+// current = { name: "English", death: 2005, birthdayYear: 1940 }
+// Lifespan: 2005 - 1940 = 65
+// max = { name: "Math", death: 1990, birthdayYear: 1920, lifespan: 70 }
+// Since 65 < 70, max remains the same.
+
+// Iteration 3:
+// current = { name: "Physics", death: 1985, birthdayYear: 1910 }
+// Lifespan: 1985 - 1910 = 75
+// max = { name: "Math", death: 1990, birthdayYear: 1920, lifespan: 70 }
+// Since 75 > 70, max is updated to { name: "Physics", death: 1985, birthdayYear: 1910, lifespan: 75 }.
+
+// Iteration 4:
+// current = { name: "Chemistry", death: 2010, birthdayYear: 1935 }
+// Lifespan: 2010 - 1935 = 75
+// max = { name: "Physics", death: 1985, birthdayYear: 1910, lifespan: 75 }
+// Since 75 = 75, max remains the same.
+// Iteration 5:
+
+// current = { name: "Biology", death: 2020, birthdayYear: 1950 }
+// Lifespan: 2020 - 1950 = 70
+// max = { name: "Physics", death: 1985, birthdayYear: 1910, lifespan: 75 }
+// Since 70 < 75, max remains the same.
+
+// function formatNumber(num) {
+//   return num >= 1e9
+//     ? (num / 1e9).toFixed(1) + "B"
+//     : num >= 1e6
+//     ? (num / 1e6).toFixed(1) + "M"
+//     : num >= 1e3
+//     ? (num / 1e3).toFixed(1) + "K"
+//     : num;
+// }
+// console.log(formatNumber(1500000000000000));
+
+const daysOfWeek = ["sun", "mon", "tus", "wed", "thu", "fri", "sat"];
+
+const months = [
+  "JAN",
+  "FEB",
+  "MAR",
+  "APR",
+  "MAY",
+  "JUN",
+  "JUL",
+  "AUG",
+  "SEP",
+  "OCT",
+  "NOV",
+  "DEV",
 ];
 
-const biggest = data.reduce((max, current) =>
-  current.death - current.birthdayYear > max.death - max.birthdayYear
-    ? current
-    : max
-);
+const $ = (id) => document.getElementById(id);
+const zeroPadding = (num) => String(num).padStart(2, "0");
 
-console.log(
-  `The biggest lifespan is ${biggest.name} with ${
-    biggest.death - biggest.birthdayYear
-  } years.`
-);
+function clock() {
+  const today = new Date();
+  const h = today.getHours();
+  const m = today.getMinutes();
+  const s = today.getSeconds();
+  const ampm = h < 11 ? "AM" : "PM";
+  const day = today.getDay();
+  const date = today.getDate();
+  const month = today.getMonth();
+  const year = today.getFullYear();
+
+  $("hours").innerHTML = zeroPadding(h);
+  $("min").innerHTML = zeroPadding(m);
+  $("sec").innerHTML = zeroPadding(s);
+  $("ampm").innerHTML = ampm;
+  const prevActive = document.querySelector(".active");
+  if (prevActive) prevActive.classList.remove("active");
+
+  const currentDayElement = $(daysOfWeek[day]);
+  if (currentDayElement) currentDayElement.classList.add("active");
+  $("year").innerHTML = year;
+  $("month").innerHTML = months[month];
+  $("day").innerHTML = zeroPadding(date);
+}
+
+setInterval(clock, 400);
